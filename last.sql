@@ -18,12 +18,14 @@
 --
 -- Table structure for table `clients`
 --
-
+DROP DATABASE location2;
+CREATE DATABASE location2;
+USE location2;
 DROP TABLE IF EXISTS `clients`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `clients` (
-  `idclient` int NOT NULL,
+  `idclient` int NOT NULL AUTO_INCREMENT,
   `nom` varchar(50) DEFAULT NULL,
   `adresse` varchar(50) DEFAULT NULL,
   `tel` varchar(20) DEFAULT NULL,
@@ -49,7 +51,7 @@ DROP TABLE IF EXISTS `contrats`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `contrats` (
-  `idcontrat` int NOT NULL,
+  `idcontrat` int NOT NULL AUTO_INCREMENT,
   `dateDebut` date DEFAULT NULL,
   `dateFin` date DEFAULT NULL,
   `duree` int DEFAULT NULL,
