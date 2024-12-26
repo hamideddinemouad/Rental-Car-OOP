@@ -22,8 +22,8 @@
                 <li><a href="../Contrats/contrats.php">Contrats</a></li>
             </ul>
             <div class="auth-buttons flex space-x-4">
-                <a href="./Authentification/login.php" class="px-4 py-2 bg-yellow-500 hover:bg-yellow-600 rounded-md text-white font-medium">Login</a>
-                <a href="./Authentification/register.php" class="px-4 py-2 bg-green-600 hover:bg-green-700 rounded-md text-white font-medium">Sign Up</a>
+                <a href="../Authentification/login.php" class="px-4 py-2 bg-yellow-500 hover:bg-yellow-600 rounded-md text-white font-medium">Login</a>
+                <a href="../Authentification/register.php" class="px-4 py-2 bg-green-600 hover:bg-green-700 rounded-md text-white font-medium">Sign Up</a>
             </div>
         </div>
     </nav>
@@ -48,6 +48,7 @@
                     <table class='table-auto w-full border-collapse'>
                         <thead class='bg-[#F2E8C6] text-gray-700'>
                             <tr>
+                                <th class='px-4 py-2 border'>ID Car</th>
                                 <th class='px-4 py-2 border'>Marque</th>
                                 <th class='px-4 py-2 border'>Modele</th>
                                 <th class='px-4 py-2 border'>Year</th>
@@ -59,6 +60,7 @@
             while ($row = $result->fetch_assoc()) {
 
                 echo "<tr class='hover:bg-gray-300'>
+                        <td class='px-4 py-2 border'>{$row['idvoiture']}</td>
                         <td class='px-4 py-2 border'>{$row['marque']}</td>
                         <td class='px-4 py-2 border'>{$row['modele']}</td>
                         <td class='px-4 py-2 border'>{$row['annee']}</td>

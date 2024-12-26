@@ -56,6 +56,11 @@
         <h2 class="text-2xl font-bold text-yellow-500 mb-4 text-center">Edit Car</h2>
 
         <div class="mb-4">
+            <label for="idvoiture" class="block text-sm font-medium text-gray-600">ID Car</label>
+            <input type="text" name="idvoiture"  class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-red-600 focus:outline-none" value="<?= $car['idvoiture'] ?>" required>
+        </div>
+
+        <div class="mb-4">
             <label for="marque" class="block text-sm font-medium text-gray-600">Marque</label>
             <input type="text" name="marque"  class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-red-600 focus:outline-none" value="<?= $car['marque'] ?>" required>
         </div>
