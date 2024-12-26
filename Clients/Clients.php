@@ -6,7 +6,7 @@
     <title>Clients</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../css/style-clients.css">
-    <script src="https://cdn.tailwindcss.com"></script>
+    
 </head>
 <body class="bg-[url('/img/cars.4.jpg')] bg-no-repeat bg-cover">
 
