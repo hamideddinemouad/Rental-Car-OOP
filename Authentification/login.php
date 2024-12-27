@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,8 +9,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class=" flex items-center justify-center min-h-screen bg-cover bg-center bg-black" >
-    <form method="POST" class="bg-white p-8 rounded shadow-lg w-full max-w-sm">
-
+    <form method="POST" action="../classAuth.php" class="bg-white p-8 rounded shadow-lg w-full max-w-sm">
+    <input type="hidden" name="formtype" value="login">
         <h2 class="text-2xl font-bold text-yellow-500 mb-4 text-center">Login</h2>
 
         <div class="mb-4">
@@ -17,7 +19,7 @@
         </div>
         <div class="mb-6">
             <label for="password" class="block text-sm font-medium text-gray-600">Password</label>
-            <input type="password" name="password" id="password" placeholder="Your password" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-red-600 focus:outline-none">
+            <input type="password" name="passwor" id="password" placeholder="Your password" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-red-600 focus:outline-none">
         </div>
 
         <button type="submit"class="w-full bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600">Login</button>
