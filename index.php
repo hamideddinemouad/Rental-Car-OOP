@@ -1,5 +1,5 @@
 <?php
-session_start();
+include('session_check.php');
 ?>
 
 <!DOCTYPE html>
@@ -37,7 +37,7 @@ session_start();
                     <a href="/Authentification/login.php" class="px-4 py-2 bg-yellow-500 hover:bg-yellow-600 rounded-md text-white font-medium">Login</a>
                     <a href="/Authentification/register.php" class="px-4 py-2 bg-green-600 hover:bg-green-700 rounded-md text-white font-medium">Sign Up</a>
                 <?php endif; ?>
-                
+
             </div>
         </div>
     </nav>
