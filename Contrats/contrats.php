@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,14 +21,21 @@
         
         <div class="nav-menu flex items-center space-x-6 overflow-x-auto">
             <ul>
-                <li><a href="../home.html" >Home</a></li>
+                <li><a href="../index.html" >Home</a></li>
                 <li><a href="../Clients/clients.php">Clients</a></li>
                 <li><a href="../Cars/cars.php">Cars</a></li>
                 <li><a href="../Contrats/contrats.php" class="active">Contrats</a></li>
             </ul>
             <div class="auth-buttons flex space-x-4">
-                <a href="../Authentification/login.php" class="px-4 py-2 bg-yellow-500 hover:bg-yellow-600 rounded-md text-white font-medium">Login</a>
-                <a href="../Authentification/register.php" class="px-4 py-2 bg-green-600 hover:bg-green-700 rounded-md text-white font-medium">Sign Up</a>
+
+                <?php if (isset($_SESSION['email'])): ?>
+                    <span class="text-yellow-500 font-bold"><?php echo htmlspecialchars($_SESSION['username'] ?? ''); ?></span>
+                    <a href="classAuth.php?action=logout" class="px-4 py-2 bg-red-500 hover:bg-red-600 rounded-md text-white font-medium">Logout</a>
+                <?php else: ?>
+                    <a href="/Authentification/login.php" class="px-4 py-2 bg-yellow-500 hover:bg-yellow-600 rounded-md text-white font-medium">Login</a>
+                    <a href="/Authentification/register.php" class="px-4 py-2 bg-green-600 hover:bg-green-700 rounded-md text-white font-medium">Sign Up</a>
+                <?php endif; ?>
+                
             </div>
         </div>
     </nav>

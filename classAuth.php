@@ -1,26 +1,23 @@
 <?php
-session_start(); 
+session_start();
 
 class Auth {
-    public $email;
     private $db;
 
-    public function __construct($email = null) {
-        $this->email = $email;
+    public function __construct() {
         $this->db = new mysqli('localhost', 'root', 'password', 'rental');
-        
+
         if ($this->db->connect_error) {
             die("Database connection failed: " . $this->db->connect_error);
         }
     }
 
-    public function register($username, $email, $password, $role) {
-        $query = "SELECT id FROM users WHERE email = '$email'";
-        $result = $this->db->query($query);
-
-        if (!$result) {
-            die("Query failed: " . $this->db->error);
-        }
+    public function register($username, $email, $password, $role = 'user') {
+       
+        $query = $this->db->prepare("SELECT id FROM users WHERE email = ?");
+        $query->bind_param('s', $email);
+        $query->execute();
+        $result = $query->get_result();
 
         if ($result->num_rows > 0) {
             return "Email already registered.";
@@ -28,8 +25,10 @@ class Auth {
 
         $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
-        $query = "INSERT INTO users ( username, email, password, role) VALUES ('$username','$email', '$hashedPassword', '$role')";
-        if ($this->db->query($query)) {
+        $query = $this->db->prepare("INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, ?)");
+        $query->bind_param('ssss', $username, $email, $hashedPassword, $role);
+
+        if ($query->execute()) {
             return "User registered successfully.";
         } else {
             return "Registration failed: " . $this->db->error;
@@ -37,24 +36,26 @@ class Auth {
     }
 
     public function login($email, $password) {
-        $query = "SELECT password FROM users WHERE email = '$email'";
-        $result = $this->db->query($query);
 
-        if (!$result) {
-            die("Query failed: " . $this->db->error);
-        }
+        $query = $this->db->prepare("SELECT id, username, password FROM users WHERE email = ?");
+        $query->bind_param('s', $email);
+        $query->execute();
+        $result = $query->get_result();
 
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
-            $hashedPassword = $row['password'];
 
-            if (password_verify($password, $hashedPassword)) {
+            if (password_verify($password, $row['password'])) {
+                
                 $_SESSION['email'] = $email;
+                $_SESSION['username'] = $row['username'];  
                 return true;
+            } else {
+                return "Incorrect password.";
             }
+        } else {
+            return "Email not found.";
         }
-
-        return false; 
     }
 
     public function isAuthenticated() {
@@ -62,34 +63,38 @@ class Auth {
     }
 
     public function logout() {
-        session_destroy();
-        unset($_SESSION['email']);
+        session_destroy();  
+        unset($_SESSION['email'], $_SESSION['username']);  
     }
 }
-$auth = new Auth();
-// var_dump($_POST);
-
-if 
-
-$register = $auth->register($_POST['username'], $_POST['email'], $_POST['password'], 'admin' );
-header ("Location: ../Authentification/login.php");
-// header ("Location: ../home.php");
 
 
-if ($auth->login($_POST['email'], $_POST['password'])) {
-    echo "Login successful. Welcome, " . $_SESSION['email'] . "<br>";
-} else {
-    echo "Login failed. Invalid credentials.<br>";
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $auth = new Auth();
+
+    if (isset($_POST['action'])) {
+        if ($_POST['action'] === 'register') {
+            $result = $auth->register($_POST['username'], $_POST['email'], $_POST['password']);
+            echo $result;
+
+        } elseif ($_POST['action'] === 'login') {
+            $result = $auth->login($_POST['email'], $_POST['password']);
+
+            if ($result === true) {
+                header("Location: index.php");
+                exit;
+            } else {
+                echo $result;  
+            }
+        }
+    }
 }
 
-// if ($auth->isAuthenticated()) {
-//     echo "User is authenticated.<br>";
-// } else {
-//     echo "User is not authenticated.<br>";
-// }
 
-// $auth->logout();
-// if (!$auth->isAuthenticated()) {
-//     echo "User has been logged out.";
-// }
+if (isset($_GET['action']) && $_GET['action'] === 'logout') {
+    $auth = new Auth();
+    $auth->logout();  
+    header("Location: index.php");  
+    exit;
+}
 ?>
