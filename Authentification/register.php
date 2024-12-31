@@ -12,7 +12,7 @@ require_once '../classAuth.php';
     <title>Register</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="flex items-center justify-center min-h-screen bg-black">
+<body class="flex items-center justify-center min-h-screen bg-gray-200">
     <form method="POST" class="bg-white p-6 rounded-lg shadow-md w-full max-w-xl">
         <input type="hidden" name="action" value="register">
 
@@ -41,7 +41,7 @@ require_once '../classAuth.php';
         
         <input type="hidden" name="role" value="admin">
         
-        <button type="submit" class="w-full bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600">Registe</button>
+        <button type="submit" class="w-full bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600">Register</button>
         
         <p class="mt-4 text-sm text-center text-gray-600">Already have an account?<a href="login.php" class="text-red-500 hover:underline">Login here</a></p>
     </form>

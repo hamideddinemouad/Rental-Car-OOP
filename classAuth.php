@@ -74,14 +74,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (isset($_POST['action'])) {
         if ($_POST['action'] === 'register') {
-            $result = $auth->register($_POST['username'], $_POST['email'], $_POST['password']);
+            $result = $auth->register($_POST['username'], $_POST['email'], $_POST['password'], $_POST['role']);
             echo $result;
 
         } elseif ($_POST['action'] === 'login') {
             $result = $auth->login($_POST['email'], $_POST['password']);
 
             if ($result === true) {
-                header("Location: index.php");
+                header("Location: ../index.php");
                 exit;
             } else {
                 echo $result;  
@@ -94,7 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 if (isset($_GET['action']) && $_GET['action'] === 'logout') {
     $auth = new Auth();
     $auth->logout();  
-    header("Location: index.php");  
+    header("Location: ../index.php");  
     exit;
 }
 ?>

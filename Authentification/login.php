@@ -13,7 +13,7 @@ require_once '../classAuth.php';
     <title>Login</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="flex items-center justify-center min-h-screen bg-black">
+<body class="flex items-center justify-center min-h-screen bg-gray-200">
     <form method="POST" class="bg-white p-6 rounded-lg shadow-md w-full max-w-xl">
         <input type="hidden" name="action" value="login">
 
