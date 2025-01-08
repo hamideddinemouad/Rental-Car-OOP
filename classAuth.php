@@ -1,5 +1,9 @@
 <?php
-session_start();
+if (!isset($_SESSION))
+{
+    session_start();
+}
+
 
 class Auth {
     private $db;
@@ -20,6 +24,7 @@ class Auth {
         $result = $query->get_result();
 
         if ($result->num_rows > 0) {
+            $_SESSION['error'] = "Email already registered.";
             header("location: register.php");
             exit();
             // return "Email already registered.";
@@ -31,15 +36,16 @@ class Auth {
         $query->bind_param('ssss', $username, $email, $hashedPassword, $role);
 
         if ($query->execute()) {
+            
             header("location: login.php");
             exit();
-            // return "User registered successfully.";
         } else {
-            return "Registration failed: " . $this->db->error;
+            $_SESSION['error'] = "Registration failed: $this->db->error";
         }
     }
 
     public function login($email, $password) {
+        $_SESSION['works'] = 'works';
 
         $query = $this->db->prepare("SELECT id, username, password FROM users WHERE email = ?");
         $query->bind_param('s', $email);
@@ -58,6 +64,7 @@ class Auth {
                 return "Incorrect password.";
             }
         } else {
+            
             return "Email not found.";
         }
     }

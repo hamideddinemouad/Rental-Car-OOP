@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once '../Validator.php'; 
 
 
@@ -43,11 +44,10 @@ require_once '../Validator.php';
     </form>
     <?php require_once '../classAuth.php'; ?> 
     <?php
-     if (isset($errorMessage))
+     if (isset($_SESSION['error']))
     {
-        echo " <div class='mb-4 text-red-500 text-center'>
-                 $errorMessage
-            </div>";
+            echo $_SESSION['error'];
+            unset($_SESSION['error']);
     }
        ?>
 </body>

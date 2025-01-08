@@ -1,5 +1,6 @@
 <?php
 include('session_check.php');
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -29,6 +30,7 @@ include('session_check.php');
                 <li><a href="./Contrats/contrats.php">Contrats</a></li>
             </ul>
             <div class="auth-buttons flex space-x-4">
+                
 
                 <?php if (isset($_SESSION['email'])): ?>
                     <span class="text-yellow-500 font-bold"><?php echo htmlspecialchars($_SESSION['username'] ?? ''); ?></span>
