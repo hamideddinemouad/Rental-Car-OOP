@@ -20,7 +20,9 @@ class Auth {
         $result = $query->get_result();
 
         if ($result->num_rows > 0) {
-            return "Email already registered.";
+            header("location: register.php");
+            exit();
+            // return "Email already registered.";
         }
 
         $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
@@ -29,7 +31,9 @@ class Auth {
         $query->bind_param('ssss', $username, $email, $hashedPassword, $role);
 
         if ($query->execute()) {
-            return "User registered successfully.";
+            header("location: login.php");
+            exit();
+            // return "User registered successfully.";
         } else {
             return "Registration failed: " . $this->db->error;
         }
@@ -77,7 +81,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $result = $auth->register($_POST['username'], $_POST['email'], $_POST['password'], $_POST['role']);
             echo $result;
 
-        } elseif ($_POST['action'] === 'login') {
+        } 
+        elseif ($_POST['action'] === 'login') {
             $result = $auth->login($_POST['email'], $_POST['password']);
 
             if ($result === true) {

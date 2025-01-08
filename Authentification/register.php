@@ -1,6 +1,6 @@
 <?php
 require_once '../Validator.php'; 
-require_once '../classAuth.php';
+
 
 ?>
 
@@ -18,11 +18,7 @@ require_once '../classAuth.php';
 
         <h2 class="text-2xl font-bold text-yellow-500 mb-4 text-center">Register</h2>
         
-        <?php if (isset($errorMessage)): ?>
-            <div class="mb-4 text-red-500 text-center">
-                <?= htmlspecialchars($errorMessage) ?>
-            </div>
-        <?php endif; ?>
+
         
         <div class="mb-4">
             <label for="name" class="block text-sm font-medium text-gray-600">Name</label>
@@ -45,5 +41,14 @@ require_once '../classAuth.php';
         
         <p class="mt-4 text-sm text-center text-gray-600">Already have an account?<a href="login.php" class="text-red-500 hover:underline">Login here</a></p>
     </form>
+    <?php require_once '../classAuth.php'; ?> 
+    <?php
+     if (isset($errorMessage))
+    {
+        echo " <div class='mb-4 text-red-500 text-center'>
+                 $errorMessage
+            </div>";
+    }
+       ?>
 </body>
 </html>

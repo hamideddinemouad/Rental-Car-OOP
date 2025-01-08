@@ -69,7 +69,7 @@ session_start();
                         <tbody>";
 
             while ($row = $result->fetch_assoc()) {
-
+                
                 echo "<tr class='hover:bg-gray-300'>
                         <td class='px-4 py-2 border'>{$row['nom']}</td>
                         <td class='px-4 py-2 border'>{$row['adresse']}</td>
@@ -80,6 +80,7 @@ session_start();
                         </td>
                       </tr>";
             }
+            
             echo "    </tbody>
                     </table>
                 </div>";
